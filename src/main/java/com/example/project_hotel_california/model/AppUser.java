@@ -24,19 +24,16 @@ public class AppUser {
     private AppRole appRole;
 
 
-    public AppUser() {
+    public AppUser( ) {
     }
 
-    public AppUser(Long id, String username, String password, MultipartFile avatarFile, String fullName, String address, String phoneNumber, String email, AppRole appRole) {
-        this.id = id;
+    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email) {
         this.username = username;
         this.password = password;
-        this.avatarFile = avatarFile;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.appRole = appRole;
     }
 
     public Long getId() {
