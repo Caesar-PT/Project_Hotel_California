@@ -1,8 +1,7 @@
 package com.example.project_hotel_california.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class House {
@@ -28,13 +27,16 @@ public class House {
     @ManyToOne
     private AppUser appUser;
 
-    @Transient
-    private MultipartFile avatar;
+    @OneToMany
+    private List<Photo> photoList;
+
+    private String avatar;
+
 
     public House() {
     }
 
-    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, MultipartFile avatar) {
+    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, List<Photo> photoList, String avatar) {
         this.id = id;
         this.name = name;
         this.bedRoom = bedRoom;
@@ -45,6 +47,7 @@ public class House {
         this.houseStatus = houseStatus;
         this.village = village;
         this.appUser = appUser;
+        this.photoList = photoList;
         this.avatar = avatar;
     }
 
@@ -128,11 +131,19 @@ public class House {
         this.appUser = appUser;
     }
 
-    public MultipartFile getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(MultipartFile avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<Photo> getPhotosList() {
+        return photoList;
+    }
+
+    public void setPhotosList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 }
