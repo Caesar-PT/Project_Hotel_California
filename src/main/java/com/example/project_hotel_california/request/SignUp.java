@@ -18,6 +18,15 @@ public class SignUp {
     @Size(min = 3, max = 50)
     @Email
     private String email;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getUsername() {
         return username;

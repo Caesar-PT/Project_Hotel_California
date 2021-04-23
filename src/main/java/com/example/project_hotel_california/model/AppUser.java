@@ -21,11 +21,7 @@ public class AppUser {
     private AppRole appRole;
 
 
-    public AppUser() {
-    }
-
-    public AppUser(Long id, String username, String password, String fullName, String address, String phoneNumber, String email, String avatar, AppRole appRole) {
-        this.id = id;
+    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email,String avatar) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -33,8 +29,12 @@ public class AppUser {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
-        this.appRole = appRole;
     }
+
+    public AppUser() {
+    }
+
+
 
     public Long getId() {
         return id;
@@ -107,4 +107,6 @@ public class AppUser {
     public void setAppRole(AppRole appRole) {
         this.appRole = appRole;
     }
+
+
 }

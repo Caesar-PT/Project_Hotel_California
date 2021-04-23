@@ -44,7 +44,7 @@ public class UserController<IAuthenticationManager> {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseMessage> registerUser(@Valid @RequestBody SignUp signUpRequest) throws Exception {
+    public ResponseEntity<ResponseMessage> registerUser( @RequestBody SignUp signUpRequest){
 //
 //        if (accountRepository.existsByUsername(signUpRequest.getUsername())) {
 //            return new ResponseEntity<ResponseMessage>(
@@ -60,7 +60,7 @@ public class UserController<IAuthenticationManager> {
 
         AppUser user = new AppUser(signUpRequest.getUsername(), bcryptEncoder.encode(signUpRequest.getPassword()) ,
                 signUpRequest.getFullName(), signUpRequest.getAddress(),
-                signUpRequest.getPhoneNumber(), signUpRequest.getEmail()
+                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar()
         );
 
         accountService.save(user);
@@ -85,7 +85,7 @@ public class UserController<IAuthenticationManager> {
         //return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
-    @GetMapping("/hello")
+    @GetMapping("")
     public ResponseEntity<?> hello() {
         return new ResponseEntity<>(accountService.list(), HttpStatus.OK);
     }
