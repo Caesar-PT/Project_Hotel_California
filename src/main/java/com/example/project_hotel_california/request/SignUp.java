@@ -1,47 +1,31 @@
-package com.example.project_hotel_california.model;
+package com.example.project_hotel_california.request;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import javax.persistence.*;
-
-@Entity
-public class AppUser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SignUp {
+    @Size(min = 3, max = 50)
     private String username;
+    @Size(min = 6, max = 8)
     private String password;
+    @Size(min = 3, max = 50)
     private String fullName;
+    @Size(min = 3, max = 100)
     private String address;
+    @Size(min = 3, max = 50)
     private String phoneNumber;
+    @Size(min = 3, max = 50)
+    @Email
     private String email;
     private String avatar;
 
-    @ManyToOne
-    private AppRole appRole;
+    public String getAvatar() {
+        return avatar;
+    }
 
-
-    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email,String avatar) {
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public AppUser() {
-    }
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -58,14 +42,6 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getFullName() {
@@ -99,14 +75,4 @@ public class AppUser {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public AppRole getAppRole() {
-        return appRole;
-    }
-
-    public void setAppRole(AppRole appRole) {
-        this.appRole = appRole;
-    }
-
-
 }
