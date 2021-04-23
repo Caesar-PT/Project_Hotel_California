@@ -1,0 +1,4 @@
+DB_URL=jdbc:mysql://localhost:3306/hotel_california
+DB_USERNAME=root
+DB_PASSWORD=Vuoncodai123
+IMAGE_SOURCE=D:\upload
