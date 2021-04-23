@@ -13,9 +13,6 @@ public class Post {
     @ManyToOne
     private House house;
 
-    @OneToMany
-    private List<Photos> photos;
-
     private String title;
 
     private Date startDate;
@@ -26,10 +23,9 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long id, House house, List<Photos> photos, String title, Date startDate, Date endDate, boolean status) {
+    public Post(Long id, House house, String title, Date startDate, Date endDate, boolean status) {
         this.id = id;
         this.house = house;
-        this.photos = photos;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,14 +46,6 @@ public class Post {
 
     public void setHouse(House house) {
         this.house = house;
-    }
-
-    public List<Photos> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photos> photos) {
-        this.photos = photos;
     }
 
     public String getTitle() {

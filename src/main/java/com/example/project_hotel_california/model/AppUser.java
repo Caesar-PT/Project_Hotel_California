@@ -11,29 +11,29 @@ public class AppUser {
     private Long id;
     private String username;
     private String password;
-
-    @Transient
-    private MultipartFile avatarFile;
-
     private String fullName;
     private String address;
     private String phoneNumber;
     private String email;
+    private String avatar;
 
     @ManyToOne
     private AppRole appRole;
 
 
-    public AppUser( ) {
+    public AppUser() {
     }
 
-    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email) {
+    public AppUser(Long id, String username, String password, String fullName, String address, String phoneNumber, String email, String avatar, AppRole appRole) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.avatar = avatar;
+        this.appRole = appRole;
     }
 
     public Long getId() {
@@ -60,12 +60,12 @@ public class AppUser {
         this.password = password;
     }
 
-    public MultipartFile getAvatarFile() {
-        return avatarFile;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarFile(MultipartFile avatarFile) {
-        this.avatarFile = avatarFile;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getFullName() {
@@ -107,5 +107,4 @@ public class AppUser {
     public void setAppRole(AppRole appRole) {
         this.appRole = appRole;
     }
-
 }

@@ -3,22 +3,18 @@ package com.example.project_hotel_california.model;
 import javax.persistence.*;
 
 @Entity
-public class Photos {
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private House house;
-
     private String src;
 
-    public Photos() {
+    public Photo() {
     }
 
-    public Photos(Long id, House house, String src) {
+    public Photo(Long id, String src) {
         this.id = id;
-        this.house = house;
         this.src = src;
     }
 
@@ -28,14 +24,6 @@ public class Photos {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public House getHouse() {
-        return house;
-    }
-
-    public void setHouse(House house) {
-        this.house = house;
     }
 
     public String getSrc() {
