@@ -107,4 +107,5 @@ public class AppUser {
     public void setAppRole(AppRole appRole) {
         this.appRole = appRole;
     }
+
 }

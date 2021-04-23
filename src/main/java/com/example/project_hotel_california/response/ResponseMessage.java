@@ -10,7 +10,6 @@ public class ResponseMessage {
     public ResponseMessage() {
     }
 
-    ;
 
     public ResponseMessage(boolean success, String message, Object data) {
         this.success = success;
