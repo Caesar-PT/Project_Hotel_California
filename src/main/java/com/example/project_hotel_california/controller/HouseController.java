@@ -1,6 +1,7 @@
 package com.example.project_hotel_california.controller;
 
-import com.example.project_hotel_california.model.House;
+import com.example.project_hotel_california.dto.HouseDTO;
+import com.example.project_hotel_california.model.*;
 import com.example.project_hotel_california.service.house.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,5 +47,39 @@ public class HouseController {
     public ResponseEntity<House> delete(@PathVariable Long id) {
         houseService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/houseType")
+    public ResponseEntity<List<HouseType>> showAllHouseType() {
+        List<HouseType> houseTypeList = houseService.findAllHouseType();
+        return new ResponseEntity<>(houseTypeList, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/houseStatus")
+    public ResponseEntity<List<HouseStatus>> showAllHouseStatus() {
+        List<HouseStatus> houseStatus = houseService.findAllHouseStatus();
+        return new ResponseEntity<>(houseStatus, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/village")
+    public ResponseEntity<List<Village>> showAllVillage() {
+        List<Village> village = houseService.findAllVillage();
+        return new ResponseEntity<>(village, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/photo")
+    public ResponseEntity<List<Photo>> showAllPhoto() {
+        List<Photo> photo = houseService.findAllPhoto();
+        return new ResponseEntity<>(photo, HttpStatus.OK);
+    }
+
+    @PostMapping("/show")
+    public ResponseEntity<List<House>> search(@RequestBody HouseDTO houseDTO) {
+        List<House> listHouse = houseService.findHouseByCondition(houseDTO);
+        return new ResponseEntity<>(listHouse, HttpStatus.OK);
     }
 }
