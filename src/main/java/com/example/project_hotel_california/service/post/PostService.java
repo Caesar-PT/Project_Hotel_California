@@ -31,4 +31,9 @@ public class PostService implements IPostService<Post>{
     public void remove(Long id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public List<Post> getAllPostByStatus(boolean status) {
+        return postRepository.getAllByStatus(false);
+    }
 }
