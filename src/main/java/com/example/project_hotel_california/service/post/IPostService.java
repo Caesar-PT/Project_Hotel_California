@@ -12,4 +12,6 @@ public interface IPostService<E> {
     E save(E e);
 
     void remove(Long id);
+
+    List<E> getAllPostByStatus(boolean status);
 }
