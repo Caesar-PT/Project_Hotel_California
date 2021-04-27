@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +30,7 @@ public class HouseService implements IHouseService<House>{
     private PhotoRepository photoRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AppUserRepository appUserRepository;
 
     @Override
     public List<House> findAll() {
@@ -43,10 +44,11 @@ public class HouseService implements IHouseService<House>{
 
     @Override
     public House save(House house) {
+        House newHouse =  houseRepository.saveAndFlush(house);
         if(!Objects.isNull(house.getPhoto())) {
-            house.setPhotosList(house.getPhoto().stream().map(Photo::new).collect(Collectors.toList()));
+            photoRepository.saveAll(house.getPhoto().stream().map(photo -> new Photo(photo, newHouse.getId())).collect(Collectors.toList()));
         }
-        return houseRepository.save(house);
+        return newHouse;
     }
 
     @Override

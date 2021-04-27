@@ -10,6 +10,9 @@ public class Photo {
 
     private String src;
 
+    @Column(name = "house_id")
+    private Long houseId;
+
     public Photo() {
     }
 
@@ -18,8 +21,17 @@ public class Photo {
         this.src = src;
     }
 
-    public Photo(String src) {
+    public Photo(String src, Long houseId) {
         this.src = src;
+        this.houseId = houseId;
+    }
+
+    public Long getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(Long houseId) {
+        this.houseId = houseId;
     }
 
     public Long getId() {

@@ -80,7 +80,7 @@ public class UserController<IAuthenticationManager> {
         String jwt = jwtTokenUtil.generateAccessToken(login.getUsername());
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AppUser currentUser = accountService.getCurrentUser();
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser));
        // return new ResponseEntity<>(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()), HttpStatus.OK);
         //return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()));
     }

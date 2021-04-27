@@ -28,6 +28,7 @@ public class House {
     private AppUser appUser;
 
     @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "house_id")
     private List<Photo> photoList;
 
     @Transient
