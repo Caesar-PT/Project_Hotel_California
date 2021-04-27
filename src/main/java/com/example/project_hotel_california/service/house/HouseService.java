@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class HouseService implements IHouseService<House>{
@@ -41,6 +43,9 @@ public class HouseService implements IHouseService<House>{
 
     @Override
     public House save(House house) {
+        if(!Objects.isNull(house.getPhoto())) {
+            house.setPhotosList(house.getPhoto().stream().map(Photo::new).collect(Collectors.toList()));
+        }
         return houseRepository.save(house);
     }
 

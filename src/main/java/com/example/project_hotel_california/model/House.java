@@ -27,11 +27,13 @@ public class House {
     @ManyToOne
     private AppUser appUser;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Photo> photoList;
 
-    private String avatar;
+    @Transient
+    private List<String> photo;
 
+    private String avatar;
 
     public House() {
     }
@@ -145,5 +147,13 @@ public class House {
 
     public void setPhotosList(List<Photo> photoList) {
         this.photoList = photoList;
+    }
+
+    public List<String> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(List<String> photo) {
+        this.photo = photo;
     }
 }
