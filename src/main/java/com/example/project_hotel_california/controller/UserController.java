@@ -114,4 +114,12 @@ public class UserController<IAuthenticationManager> {
         oldAppUser.setPhoneNumber(appUser.getPhoneNumber());
         return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
     }
+    @PutMapping("/resetPassword")
+    private ResponseEntity<AppUser> resetPassword( @RequestBody AppUser appUser) {
+        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AppUser oldAppUser = accountService.findByUsername(currentUser.getUsername());
+        oldAppUser.setPassword(bcryptEncoder.encode(appUser.getPassword()));
+        return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
+    }
 }
+
