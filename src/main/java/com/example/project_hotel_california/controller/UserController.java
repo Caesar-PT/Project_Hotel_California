@@ -16,8 +16,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,17 +46,23 @@ public class UserController<IAuthenticationManager> {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseMessage> registerUser( @RequestBody SignUp signUpRequest){
-//
+    public ResponseEntity<ResponseMessage> registerUser( @RequestBody SignUp signUpRequest ){
+
+
 //        if (accountRepository.existsByUsername(signUpRequest.getUsername())) {
 //            return new ResponseEntity<ResponseMessage>(
-//                    new ResponseMessage(false, "USERNAME", null),
+//                    new ResponseMessage(true, "USERNAME", null),
 //                    HttpStatus.BAD_REQUEST);
 //        }
 //
 //        if (accountRepository.existsByEmail(signUpRequest.getEmail())) {
 //            return new ResponseEntity<ResponseMessage>(
-//                    new ResponseMessage(false, " Nhập sai dạng email (abc@gmail.com) !", null),
+//                    new ResponseMessage(true, " Nhập sai dạng email (abc@gmail.com) !", null),
+//                    HttpStatus.BAD_REQUEST);
+//        }
+//        if (accountRepository.existsByPassword(signUpRequest.getPassword())) {
+//            return new ResponseEntity<ResponseMessage>(
+//                    new ResponseMessage(true, " password 6-8", null),
 //                    HttpStatus.BAD_REQUEST);
 //        }
 
@@ -81,12 +89,29 @@ public class UserController<IAuthenticationManager> {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AppUser currentUser = accountService.getCurrentUser();
         return ResponseEntity.ok(new JwtResponse(jwt));
-       // return new ResponseEntity<>(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()), HttpStatus.OK);
-        //return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
     @GetMapping("")
     public ResponseEntity<?> hello() {
         return new ResponseEntity<>(accountService.list(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<AppUser> getUser(@PathVariable("id") Long id) {
+        AppUser appUser = accountService.findById(id);
+        return new ResponseEntity<AppUser>(appUser, HttpStatus.OK);
+    }
+
+
+    @PutMapping("/update")
+    private ResponseEntity<AppUser> updateUser( @RequestBody AppUser appUser) {
+        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AppUser oldAppUser = accountService.findByUsername(currentUser.getUsername());
+
+        oldAppUser.setFullName(appUser.getFullName());
+        oldAppUser.setEmail(appUser.getEmail());
+        oldAppUser.setAddress(appUser.getAddress());
+        oldAppUser.setPhoneNumber(appUser.getPhoneNumber());
+        return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
     }
 }

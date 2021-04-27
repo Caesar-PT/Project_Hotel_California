@@ -1,7 +1,4 @@
 package com.example.project_hotel_california.model;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 
 @Entity

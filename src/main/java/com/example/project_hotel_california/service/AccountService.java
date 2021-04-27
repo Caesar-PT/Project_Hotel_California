@@ -42,4 +42,14 @@ public class AccountService implements IAccountService {
         return user;
     }
 
+    @Override
+    public AppUser findById(Long id) {
+        return accountRepository.findById(id).get();
+    }
+
+    @Override
+    public AppUser findByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
+
 }

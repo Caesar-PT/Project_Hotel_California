@@ -1,7 +1,9 @@
 package com.example.project_hotel_california.request;
 
+import com.sun.istack.NotNull;
+
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class SignUp {
@@ -17,6 +19,8 @@ public class SignUp {
     private String phoneNumber;
     @Size(min = 3, max = 50)
     @Email
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+    @NotNull
     private String email;
     private String avatar;
 
@@ -75,4 +79,5 @@ public class SignUp {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
