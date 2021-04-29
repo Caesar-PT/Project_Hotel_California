@@ -13,6 +13,7 @@ public class House {
     private double bathRoom;
     private String description;
     private double priceByDay;
+    private String address;
 
     @ManyToOne
     private HouseType houseType;
@@ -35,13 +36,14 @@ public class House {
     public House() {
     }
 
-    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, List<Photo> photoList, String avatar) {
+    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, String address, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, List<Photo> photoList, String avatar) {
         this.id = id;
         this.name = name;
         this.bedRoom = bedRoom;
         this.bathRoom = bathRoom;
         this.description = description;
         this.priceByDay = priceByDay;
+        this.address = address;
         this.houseType = houseType;
         this.houseStatus = houseStatus;
         this.village = village;
@@ -144,5 +146,13 @@ public class House {
 
     public void setPhotosList(List<Photo> photoList) {
         this.photoList = photoList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
