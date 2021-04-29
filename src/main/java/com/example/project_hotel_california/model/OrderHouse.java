@@ -4,23 +4,23 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-public class OderPost {
+public class OrderHouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    private Post post;
+    private House house;
 
     private Date startDate;
     private Date endDate;
 
-    public OderPost() {
+    public OrderHouse() {
     }
 
-    public OderPost(Long id, Post post, Date startDate, Date endDate) {
+    public OrderHouse(Long id, House house, Date startDate, Date endDate) {
         this.id = id;
-        this.post = post;
+        this.house = house;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -31,14 +31,6 @@ public class OderPost {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
     }
 
     public Date getStartDate() {
@@ -55,5 +47,13 @@ public class OderPost {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
     }
 }

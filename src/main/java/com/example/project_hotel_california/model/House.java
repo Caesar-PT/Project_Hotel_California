@@ -8,7 +8,6 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private double bedRoom;
     private double bathRoom;
