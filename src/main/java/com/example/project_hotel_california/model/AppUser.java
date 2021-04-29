@@ -1,6 +1,9 @@
 package com.example.project_hotel_california.model;
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class AppUser {
     @Id
@@ -18,7 +21,7 @@ public class AppUser {
     private AppRole appRole;
 
 
-    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email,String avatar) {
+    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email, String avatar,AppRole appRole) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -26,6 +29,7 @@ public class AppUser {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
+        this.appRole = appRole;
     }
 
     public AppUser() {
