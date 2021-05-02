@@ -7,6 +7,7 @@ import com.example.project_hotel_california.repository.AccountRepository;
 import com.example.project_hotel_california.repository.AppRoleRepository;
 import com.example.project_hotel_california.request.Login;
 import com.example.project_hotel_california.request.SignUp;
+import com.example.project_hotel_california.request.UserPrinciple;
 import com.example.project_hotel_california.response.JwtResponse;
 import com.example.project_hotel_california.response.ResponseMessage;
 import com.example.project_hotel_california.service.IAccountService;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 
 
 @RestController
@@ -59,7 +61,7 @@ public class UserController<IAuthenticationManager> {
 
         AppUser user = new AppUser(signUpRequest.getUsername(), bcryptEncoder.encode(signUpRequest.getPassword()) ,
                 signUpRequest.getFullName(), signUpRequest.getAddress(),
-                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(),signUpRequest.getAppRole()
+                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(), (Set<AppRole>) signUpRequest.getAppRole()
         );
 
         accountService.save(user);
@@ -96,7 +98,7 @@ public class UserController<IAuthenticationManager> {
 
     @PutMapping("/update")
     private ResponseEntity<AppUser> updateUser( @RequestBody AppUser appUser) {
-        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserPrinciple currentUser = (UserPrinciple)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         AppUser oldAppUser = accountService.findByUsername(currentUser.getUsername());
 
         oldAppUser.setFullName(appUser.getFullName());
