@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -58,15 +59,17 @@ public class UserController<IAuthenticationManager> {
 
         Optional<AppRole> role = appRoleRepository.findById(1l);
         role.ifPresent(signUpRequest::setAppRole);
+        Set<AppRole> appRoles = new HashSet<>();
+        appRoles.add(signUpRequest.getAppRole());
 
         AppUser user = new AppUser(signUpRequest.getUsername(), bcryptEncoder.encode(signUpRequest.getPassword()) ,
                 signUpRequest.getFullName(), signUpRequest.getAddress(),
-                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(), (Set<AppRole>) signUpRequest.getAppRole()
+                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(), appRoles
         );
 
         accountService.save(user);
 
-        return new ResponseEntity<ResponseMessage>(
+        return new ResponseEntity<>(
                 new ResponseMessage(true, "DANG KI THANH CONG!", null),
                 HttpStatus.OK);
     }
