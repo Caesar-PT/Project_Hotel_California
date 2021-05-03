@@ -1,7 +1,7 @@
 package com.example.project_hotel_california.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class OrderHouse {
@@ -12,17 +12,21 @@ public class OrderHouse {
     @OneToOne
     private House house;
 
-    private Date startDate;
-    private Date endDate;
+    private Date checkin;
+    private Date checkout;
+
+    @ManyToOne
+    private AppUser appUser;
 
     public OrderHouse() {
     }
 
-    public OrderHouse(Long id, House house, Date startDate, Date endDate) {
+    public OrderHouse(Long id, House house, Date checkin, Date checkout, AppUser appUser) {
         this.id = id;
         this.house = house;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.appUser = appUser;
     }
 
     public Long getId() {
@@ -33,27 +37,35 @@ public class OrderHouse {
         this.id = id;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public House getHouse() {
         return house;
     }
 
     public void setHouse(House house) {
         this.house = house;
+    }
+
+    public Date getCheckin() {
+        return checkin;
+    }
+
+    public void setCheckin(Date checkin) {
+        this.checkin = checkin;
+    }
+
+    public Date getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(Date checkout) {
+        this.checkout = checkout;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

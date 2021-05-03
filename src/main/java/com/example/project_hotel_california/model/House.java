@@ -27,16 +27,13 @@ public class House {
     @ManyToOne
     private AppUser appUser;
 
-    @OneToMany
-    private List<Photo> photoList;
-
     private String avatar;
 
 
     public House() {
     }
 
-    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, String address, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, List<Photo> photoList, String avatar) {
+    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, String address, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, String avatar) {
         this.id = id;
         this.name = name;
         this.bedRoom = bedRoom;
@@ -48,7 +45,6 @@ public class House {
         this.houseStatus = houseStatus;
         this.village = village;
         this.appUser = appUser;
-        this.photoList = photoList;
         this.avatar = avatar;
     }
 
@@ -140,13 +136,6 @@ public class House {
         this.avatar = avatar;
     }
 
-    public List<Photo> getPhotosList() {
-        return photoList;
-    }
-
-    public void setPhotosList(List<Photo> photoList) {
-        this.photoList = photoList;
-    }
 
     public String getAddress() {
         return address;
@@ -155,4 +144,5 @@ public class House {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

@@ -7,7 +7,7 @@ import com.example.project_hotel_california.request.Login;
 import com.example.project_hotel_california.request.SignUp;
 import com.example.project_hotel_california.response.JwtResponse;
 import com.example.project_hotel_california.response.ResponseMessage;
-import com.example.project_hotel_california.service.IAccountService;
+import com.example.project_hotel_california.service.account.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.validation.Valid;
 
 
 @RestController
