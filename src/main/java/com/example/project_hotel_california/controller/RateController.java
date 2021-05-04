@@ -6,7 +6,7 @@ import com.example.project_hotel_california.model.Rate;
 
 import com.example.project_hotel_california.request.RateForm;
 import com.example.project_hotel_california.request.UserPrinciple;
-import com.example.project_hotel_california.service.AccountService;
+import com.example.project_hotel_california.service.account.AccountService;
 import com.example.project_hotel_california.service.house.HouseService;
 import com.example.project_hotel_california.service.rate.IRateService;
 import org.springframework.beans.factory.annotation.Autowired;

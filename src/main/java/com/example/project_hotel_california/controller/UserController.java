@@ -10,7 +10,7 @@ import com.example.project_hotel_california.request.SignUp;
 import com.example.project_hotel_california.request.UserPrinciple;
 import com.example.project_hotel_california.response.JwtResponse;
 import com.example.project_hotel_california.response.ResponseMessage;
-import com.example.project_hotel_california.service.IAccountService;
+import com.example.project_hotel_california.service.account.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

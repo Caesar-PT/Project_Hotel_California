@@ -1,11 +1,10 @@
 package com.example.project_hotel_california.controller;
-
 import com.example.project_hotel_california.model.AppUser;
 import com.example.project_hotel_california.model.Comment;
 import com.example.project_hotel_california.model.House;
 import com.example.project_hotel_california.request.CommentForm;
 import com.example.project_hotel_california.request.UserPrinciple;
-import com.example.project_hotel_california.service.AccountService;
+import com.example.project_hotel_california.service.account.AccountService;
 import com.example.project_hotel_california.service.comment.ICommentService;
 import com.example.project_hotel_california.service.house.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
