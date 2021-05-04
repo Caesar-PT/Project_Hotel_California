@@ -3,23 +3,27 @@ package com.example.project_hotel_california.model;
 import javax.persistence.*;
 
 @Entity
-public class Photo {
+public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    private AppUser appUser;
+
+    @ManyToOne
     private House house;
 
-    private String src;
+    private Double star;
 
-    public Photo() {
+    public Rate() {
     }
 
-    public Photo(Long id, House house, String src) {
+    public Rate(Long id, AppUser appUser, House house, Double star) {
         this.id = id;
+        this.appUser = appUser;
         this.house = house;
-        this.src = src;
+        this.star = star;
     }
 
     public Long getId() {
@@ -30,12 +34,12 @@ public class Photo {
         this.id = id;
     }
 
-    public String getSrc() {
-        return src;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setSrc(String src) {
-        this.src = src;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public House getHouse() {
@@ -44,5 +48,13 @@ public class Photo {
 
     public void setHouse(House house) {
         this.house = house;
+    }
+
+    public Double getStar() {
+        return star;
+    }
+
+    public void setStar(Double star) {
+        this.star = star;
     }
 }
