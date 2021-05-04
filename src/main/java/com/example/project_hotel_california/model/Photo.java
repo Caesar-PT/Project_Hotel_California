@@ -8,6 +8,9 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private House house;
+
     private String src;
 
     @Column(name = "house_id")
@@ -16,8 +19,9 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(Long id, String src) {
+    public Photo(Long id, House house, String src) {
         this.id = id;
+        this.house = house;
         this.src = src;
     }
 
@@ -48,5 +52,13 @@ public class Photo {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
     }
 }

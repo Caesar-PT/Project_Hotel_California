@@ -1,4 +1,4 @@
-package com.example.project_hotel_california.service;
+package com.example.project_hotel_california.service.account;
 
 import com.example.project_hotel_california.model.AppUser;
 
@@ -12,5 +12,7 @@ public interface IAccountService {
 
     AppUser getCurrentUser();
 
+    AppUser findById(Long id);
 
+    AppUser findByUsername(String username);
 }

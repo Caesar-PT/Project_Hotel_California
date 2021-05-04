@@ -8,13 +8,12 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JoinColumn(name = "name")
     private String name;
     private double bedRoom;
     private double bathRoom;
     private String description;
     private double priceByDay;
+    private String address;
 
     @ManyToOne
     private HouseType houseType;
@@ -28,30 +27,24 @@ public class House {
     @ManyToOne
     private AppUser appUser;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "house_id")
-    private List<Photo> photoList;
-
-    @Transient
-    private List<String> photo;
-
     private String avatar;
+
 
     public House() {
     }
 
-    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, List<Photo> photoList, String avatar) {
+    public House(Long id, String name, double bedRoom, double bathRoom, String description, double priceByDay, String address, HouseType houseType, HouseStatus houseStatus, Village village, AppUser appUser, String avatar) {
         this.id = id;
         this.name = name;
         this.bedRoom = bedRoom;
         this.bathRoom = bathRoom;
         this.description = description;
         this.priceByDay = priceByDay;
+        this.address = address;
         this.houseType = houseType;
         this.houseStatus = houseStatus;
         this.village = village;
         this.appUser = appUser;
-        this.photoList = photoList;
         this.avatar = avatar;
     }
 
@@ -143,19 +136,13 @@ public class House {
         this.avatar = avatar;
     }
 
-    public List<Photo> getPhotosList() {
-        return photoList;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhotosList(List<Photo> photoList) {
-        this.photoList = photoList;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public List<String> getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(List<String> photo) {
-        this.photo = photo;
-    }
 }

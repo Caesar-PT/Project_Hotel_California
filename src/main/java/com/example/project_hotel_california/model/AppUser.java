@@ -1,8 +1,9 @@
 package com.example.project_hotel_california.model;
-
-import org.springframework.web.multipart.MultipartFile;
-
+import javax.management.relation.Role;
 import javax.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class AppUser {
@@ -17,11 +18,11 @@ public class AppUser {
     private String email;
     private String avatar;
 
-    @ManyToOne
-    private AppRole appRole;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<AppRole> roles = new HashSet<>();
 
 
-    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email,String avatar) {
+    public AppUser(String username, String password, String fullName, String address, String phoneNumber, String email, String avatar,Set<AppRole> roles) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -29,6 +30,7 @@ public class AppUser {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
+        this.roles = roles;
     }
 
     public AppUser() {
@@ -100,12 +102,12 @@ public class AppUser {
         this.email = email;
     }
 
-    public AppRole getAppRole() {
-        return appRole;
+    public Set<AppRole> getRoles() {
+        return roles;
     }
 
-    public void setAppRole(AppRole appRole) {
-        this.appRole = appRole;
+    public void setRoles(Set<AppRole> roles) {
+        this.roles = roles;
     }
 
 
