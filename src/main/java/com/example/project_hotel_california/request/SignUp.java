@@ -1,5 +1,6 @@
 package com.example.project_hotel_california.request;
 
+import com.example.project_hotel_california.model.AppRole;
 import com.sun.istack.NotNull;
 
 import javax.validation.constraints.Email;
@@ -23,6 +24,16 @@ public class SignUp {
     @NotNull
     private String email;
     private String avatar;
+
+    private AppRole appRole;
+
+    public AppRole getAppRole() {
+        return appRole;
+    }
+
+    public void setAppRole(AppRole appRole) {
+        this.appRole = appRole;
+    }
 
     public String getAvatar() {
         return avatar;

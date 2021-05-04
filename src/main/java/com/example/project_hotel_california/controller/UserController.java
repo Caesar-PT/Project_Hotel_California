@@ -1,13 +1,16 @@
 package com.example.project_hotel_california.controller;
 
 import com.example.project_hotel_california.config.JwtTokenUtil;
+import com.example.project_hotel_california.model.AppRole;
 import com.example.project_hotel_california.model.AppUser;
 import com.example.project_hotel_california.repository.AccountRepository;
+import com.example.project_hotel_california.repository.AppRoleRepository;
 import com.example.project_hotel_california.request.Login;
 import com.example.project_hotel_california.request.SignUp;
+import com.example.project_hotel_california.request.UserPrinciple;
 import com.example.project_hotel_california.response.JwtResponse;
 import com.example.project_hotel_california.response.ResponseMessage;
-import com.example.project_hotel_california.service.account.IAccountService;
+import com.example.project_hotel_california.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -31,6 +40,8 @@ public class UserController<IAuthenticationManager> {
     private IAccountService accountService;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private AppRoleRepository appRoleRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,38 +57,26 @@ public class UserController<IAuthenticationManager> {
     public ResponseEntity<ResponseMessage> registerUser( @RequestBody SignUp signUpRequest ){
 
 
-//        if (accountRepository.existsByUsername(signUpRequest.getUsername())) {
-//            return new ResponseEntity<ResponseMessage>(
-//                    new ResponseMessage(true, "USERNAME", null),
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//
-//        if (accountRepository.existsByEmail(signUpRequest.getEmail())) {
-//            return new ResponseEntity<ResponseMessage>(
-//                    new ResponseMessage(true, " Nhập sai dạng email (abc@gmail.com) !", null),
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//        if (accountRepository.existsByPassword(signUpRequest.getPassword())) {
-//            return new ResponseEntity<ResponseMessage>(
-//                    new ResponseMessage(true, " password 6-8", null),
-//                    HttpStatus.BAD_REQUEST);
-//        }
+        Optional<AppRole> role = appRoleRepository.findById(1l);
+        role.ifPresent(signUpRequest::setAppRole);
+        Set<AppRole> appRoles = new HashSet<>();
+        appRoles.add(signUpRequest.getAppRole());
 
         AppUser user = new AppUser(signUpRequest.getUsername(), bcryptEncoder.encode(signUpRequest.getPassword()) ,
                 signUpRequest.getFullName(), signUpRequest.getAddress(),
-                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar()
+                signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(), appRoles
         );
 
         accountService.save(user);
 
-        return new ResponseEntity<ResponseMessage>(
+        return new ResponseEntity<>(
                 new ResponseMessage(true, "DANG KI THANH CONG!", null),
                 HttpStatus.OK);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login) {
-            Authentication authentication = authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -102,7 +101,7 @@ public class UserController<IAuthenticationManager> {
 
     @PutMapping("/update")
     private ResponseEntity<AppUser> updateUser( @RequestBody AppUser appUser) {
-        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserPrinciple currentUser = (UserPrinciple)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         AppUser oldAppUser = accountService.findByUsername(currentUser.getUsername());
 
         oldAppUser.setFullName(appUser.getFullName());
@@ -119,4 +118,3 @@ public class UserController<IAuthenticationManager> {
         return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
     }
 }
-

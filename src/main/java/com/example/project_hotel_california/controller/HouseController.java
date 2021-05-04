@@ -35,7 +35,11 @@ public class HouseController {
         List<House> houseList = houseService.findAll();
         return new ResponseEntity<>(houseList, HttpStatus.OK);
     }
-
+    @GetMapping("/{id}")
+    private ResponseEntity<House> getBook(@PathVariable("id") Long id) {
+        House house = houseService.findById(id);
+        return new ResponseEntity<House>(house, HttpStatus.OK);
+    }
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<House> view(@PathVariable Long id) {
         House house = houseService.findById(id);
