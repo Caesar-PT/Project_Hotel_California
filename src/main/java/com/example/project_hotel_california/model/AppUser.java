@@ -106,9 +106,5 @@ public class AppUser {
         return roles;
     }
 
-    public void setRoles(Set<AppRole> roles) {
-        this.roles = roles;
-    }
-
 
 }
