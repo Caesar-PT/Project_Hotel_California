@@ -13,6 +13,24 @@ public class HouseDTO {
     private String appUser;
     private String photoList;
     private String avatar;
+    private String province;
+    private String district;
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 
     public Long getId() {
         return id;

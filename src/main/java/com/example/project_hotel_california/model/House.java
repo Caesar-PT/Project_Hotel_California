@@ -9,6 +9,7 @@ public class House {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JoinColumn(name = "name")
     private String name;
     private double bedRoom;
     private double bathRoom;
