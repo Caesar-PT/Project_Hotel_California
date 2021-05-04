@@ -12,5 +12,7 @@ public interface IAccountService {
 
     AppUser getCurrentUser();
 
+    AppUser findById(Long id);
 
+    AppUser findByUsername(String username);
 }
