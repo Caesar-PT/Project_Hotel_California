@@ -117,4 +117,10 @@ public class UserController<IAuthenticationManager> {
         oldAppUser.setPassword(bcryptEncoder.encode(appUser.getPassword()));
         return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
     }
+
+    @GetMapping("/currentUser")
+    private ResponseEntity<AppUser> getCurrentUser(){
+        AppUser appUser = accountService.getCurrentUser();
+        return new ResponseEntity<>(appUser, HttpStatus.OK);
+    }
 }
