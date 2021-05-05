@@ -101,9 +101,7 @@ public class HouseController {
     @PostMapping("/view/{id}/booking")
     public ResponseEntity<OrderHouse> bookingHouse(@PathVariable Long id, @RequestBody OrderHouse orderHouse){
         House house = houseService.findById(id);
-        AppUser user = accountService.getCurrentUser();
         orderHouse.setHouse(house);
-        orderHouse.setAppUser(user);
         orderHouseService.save(orderHouse);
         return new ResponseEntity<>(orderHouse, HttpStatus.OK);
     }

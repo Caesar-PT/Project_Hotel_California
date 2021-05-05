@@ -28,8 +28,8 @@ public class CommentController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Comment>> showAllComment(@PathVariable Long id) {
-        List<Comment> houseList = commentService.getAllByHouseId(id);
+    public ResponseEntity<List<Comment>> showAllComment(@PathVariable Long id, @RequestParam int index) {
+        List<Comment> houseList = commentService.getAllByHouseId(id, index);
         return new ResponseEntity<>(houseList, HttpStatus.OK);
     }
 
