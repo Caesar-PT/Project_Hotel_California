@@ -1,12 +1,10 @@
 package com.example.project_hotel_california.controller;
-
 import com.example.project_hotel_california.model.AppUser;
 import com.example.project_hotel_california.model.Comment;
 import com.example.project_hotel_california.model.House;
 import com.example.project_hotel_california.request.CommentForm;
 import com.example.project_hotel_california.request.UserPrinciple;
-import com.example.project_hotel_california.service.AccountService;
-import com.example.project_hotel_california.service.comment.CommentService;
+import com.example.project_hotel_california.service.account.AccountService;
 import com.example.project_hotel_california.service.comment.ICommentService;
 import com.example.project_hotel_california.service.house.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import java.util.List;
 @RequestMapping("/comment")
 public class CommentController {
     @Autowired
-    private CommentService commentService;
+    private ICommentService commentService;
     @Autowired
     private AccountService accountService;
     @Autowired
@@ -30,8 +28,8 @@ public class CommentController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Comment>> showAllComment(@PathVariable Long id , @RequestParam int index) {
-        List<Comment> houseList = commentService.getAllByHouseId(id, index);
+    public ResponseEntity<List<Comment>> showAllComment(@PathVariable Long id) {
+        List<Comment> houseList = commentService.getAllByHouseId(id);
         return new ResponseEntity<>(houseList, HttpStatus.OK);
     }
 

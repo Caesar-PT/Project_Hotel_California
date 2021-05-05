@@ -10,7 +10,7 @@ import com.example.project_hotel_california.request.SignUp;
 import com.example.project_hotel_california.request.UserPrinciple;
 import com.example.project_hotel_california.response.JwtResponse;
 import com.example.project_hotel_california.response.ResponseMessage;
-import com.example.project_hotel_california.service.IAccountService;
+import com.example.project_hotel_california.service.account.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -117,5 +117,11 @@ public class UserController<IAuthenticationManager> {
         AppUser oldAppUser = accountService.findByUsername(currentUser.getUsername());
         oldAppUser.setPassword(bcryptEncoder.encode(appUser.getPassword()));
         return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
+    }
+
+    @GetMapping("/currentUser")
+    private ResponseEntity<AppUser> getCurrentUser(){
+        AppUser appUser = accountService.getCurrentUser();
+        return new ResponseEntity<>(appUser, HttpStatus.OK);
     }
 }

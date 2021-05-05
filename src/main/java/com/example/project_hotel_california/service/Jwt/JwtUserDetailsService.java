@@ -1,4 +1,4 @@
-package com.example.project_hotel_california.service;
+package com.example.project_hotel_california.service.Jwt;
 
 import java.util.ArrayList;
 import com.example.project_hotel_california.model.AppUser;
