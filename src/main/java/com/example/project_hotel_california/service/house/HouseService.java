@@ -15,19 +15,7 @@ public class HouseService implements IHouseService<House>{
     private HouseRepository houseRepository;
 
     @Autowired
-    private VillageRepository villageRepository;
-
-    @Autowired
-    private HouseStatusRepository houseStatusRepository;
-
-    @Autowired
-    private HouseTypeRepository houseTypeRepository;
-
-    @Autowired
-    private PhotoRepository photoRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
+    private AppUserRepository appUserRepository;
 
     @Override
     public List<House> findAll() {
@@ -52,21 +40,5 @@ public class HouseService implements IHouseService<House>{
     @Override
     public List<House> findHouseByCondition(HouseDTO houseDTO) {
         return houseRepository.findHouseByCondition(houseDTO);
-    }
-
-    public List<HouseType> findAllHouseType() {
-        return houseTypeRepository.findAll();
-    }
-
-    public List<HouseStatus> findAllHouseStatus() {
-        return houseStatusRepository.findAll();
-    }
-
-    public List<Village> findAllVillage() {
-        return villageRepository.findAll();
-    }
-
-    public List<Photo> findAllPhoto() {
-        return photoRepository.findAll();
     }
 }

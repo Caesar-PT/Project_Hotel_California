@@ -9,6 +9,7 @@ public class Village {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "district_id")
     private District district;
 
     private String name;

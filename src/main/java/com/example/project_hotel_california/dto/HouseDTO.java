@@ -6,13 +6,32 @@ public class HouseDTO {
     private String bedRoom;
     private String bathRoom;
     private String description;
-    private String priceByDay;
+    private String priceMinDay;
+    private String priceMaxDay;
     private String houseType;
     private String houseStatus;
     private String village;
     private String appUser;
     private String photoList;
     private String avatar;
+    private String province;
+    private String district;
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 
     public Long getId() {
         return id;
@@ -54,12 +73,20 @@ public class HouseDTO {
         this.description = description;
     }
 
-    public String getPriceByDay() {
-        return priceByDay;
+    public String getPriceMinDay() {
+        return priceMinDay;
     }
 
-    public void setPriceByDay(String priceByDay) {
-        this.priceByDay = priceByDay;
+    public void setPriceMinDay(String priceMinDay) {
+        this.priceMinDay = priceMinDay;
+    }
+
+    public String getPriceMaxDay() {
+        return priceMaxDay;
+    }
+
+    public void setPriceMaxDay(String priceMaxDay) {
+        this.priceMaxDay = priceMaxDay;
     }
 
     public String getHouseType() {
