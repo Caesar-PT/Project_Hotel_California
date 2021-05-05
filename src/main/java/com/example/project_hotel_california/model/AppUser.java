@@ -1,5 +1,5 @@
 package com.example.project_hotel_california.model;
-import javax.management.relation.Role;
+
 import javax.persistence.*;
 
 import java.util.HashSet;
