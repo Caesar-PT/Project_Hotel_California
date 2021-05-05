@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class CommentService implements ICommentService {
     @Autowired
     private CommentRepository commentRepository;
@@ -30,8 +29,8 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public List<Comment> getAllByHouseId(Long id) {
-        return (List<Comment>) commentRepository.findAllByHouseId(id);
+    public List<Comment> getAllByHouseId(Long id, int index) {
+        return  commentRepository.findAllByHouseId(id, index);
     }
 
 
