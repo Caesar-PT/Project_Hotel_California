@@ -16,7 +16,7 @@ public class HouseRepoImpl implements HouseRepo{
     @Override
     public List<House> findHouseByCondition(HouseDTO houseDTO) {
         StringBuilder sql =new StringBuilder();
-        sql.append("from House h join h.village v join h.village.district d join h.village.district.province p where 1=1");
+        sql.append("from House h where 1=1");
         if(houseDTO.getHouseType() != null && !"".equals(houseDTO.getHouseType().trim())){
             sql.append(" and house_type_id like '%").append(houseDTO.getHouseType()).append("%'");
         }
@@ -24,10 +24,10 @@ public class HouseRepoImpl implements HouseRepo{
             sql.append(" and house_status_id = " + houseDTO.getHouseStatus());
         }
         if(houseDTO.getProvince() != null && !"".equals(houseDTO.getProvince().trim())){
-            sql.append(" and p.id = " + houseDTO.getProvince());
+            sql.append(" and h.village.district.province.id = " + houseDTO.getProvince());
         }
         if(houseDTO.getDistrict() != null && !"".equals(houseDTO.getDistrict().trim())){
-            sql.append(" and d.id = " + houseDTO.getDistrict());
+            sql.append(" and h.village.district.id = " + houseDTO.getDistrict());
         }
         if(houseDTO.getVillage() != null && !"".equals(houseDTO.getVillage().trim())){
             sql.append(" and village_id = " + houseDTO.getVillage());
