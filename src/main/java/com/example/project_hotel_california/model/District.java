@@ -9,7 +9,6 @@ public class District {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "province_id")
     private Province province;
 
     private String name;

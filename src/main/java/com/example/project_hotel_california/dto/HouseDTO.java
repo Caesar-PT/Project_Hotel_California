@@ -6,7 +6,8 @@ public class HouseDTO {
     private String bedRoom;
     private String bathRoom;
     private String description;
-    private String priceByDay;
+    private String priceMinDay;
+    private String priceMaxDay;
     private String houseType;
     private String houseStatus;
     private String village;
@@ -72,12 +73,20 @@ public class HouseDTO {
         this.description = description;
     }
 
-    public String getPriceByDay() {
-        return priceByDay;
+    public String getPriceMinDay() {
+        return priceMinDay;
     }
 
-    public void setPriceByDay(String priceByDay) {
-        this.priceByDay = priceByDay;
+    public void setPriceMinDay(String priceMinDay) {
+        this.priceMinDay = priceMinDay;
+    }
+
+    public String getPriceMaxDay() {
+        return priceMaxDay;
+    }
+
+    public void setPriceMaxDay(String priceMaxDay) {
+        this.priceMaxDay = priceMaxDay;
     }
 
     public String getHouseType() {

@@ -16,21 +16,33 @@ public class HouseRepoImpl implements HouseRepo{
     @Override
     public List<House> findHouseByCondition(HouseDTO houseDTO) {
         StringBuilder sql =new StringBuilder();
-        sql.append("from House h join h.village v where 1=1");
-        if(houseDTO.getName() != null && !"".equals(houseDTO.getName().trim())){
-            sql.append(" and h.name like '%").append(houseDTO.getName()).append("%'");
-        }
+        sql.append("from House h join h.village v join h.village.district d join h.village.district.province p where 1=1");
         if(houseDTO.getHouseType() != null && !"".equals(houseDTO.getHouseType().trim())){
             sql.append(" and house_type_id like '%").append(houseDTO.getHouseType()).append("%'");
         }
         if(houseDTO.getHouseStatus() != null && !"".equals(houseDTO.getHouseStatus().trim())){
-            sql.append(" and house_status_id like '%").append(houseDTO.getHouseStatus()).append("%'");
+            sql.append(" and house_status_id = " + houseDTO.getHouseStatus());
+        }
+        if(houseDTO.getProvince() != null && !"".equals(houseDTO.getProvince().trim())){
+            sql.append(" and p.id = " + houseDTO.getProvince());
+        }
+        if(houseDTO.getDistrict() != null && !"".equals(houseDTO.getDistrict().trim())){
+            sql.append(" and d.id = " + houseDTO.getDistrict());
         }
         if(houseDTO.getVillage() != null && !"".equals(houseDTO.getVillage().trim())){
-            sql.append(" and village_id like '%").append(houseDTO.getVillage()).append("%' and  village_id = v.id");
+            sql.append(" and village_id = " + houseDTO.getVillage());
         }
-        if(houseDTO.getPriceByDay() != null && !"".equals(houseDTO.getPriceByDay())){
-            sql.append(" and price_by_day < " + houseDTO.getPriceByDay());
+        if(houseDTO.getBedRoom() != null && !"".equals(houseDTO.getBedRoom().trim())){
+            sql.append(" and bed_room = " + houseDTO.getBedRoom());
+        }
+        if(houseDTO.getBathRoom() != null && !"".equals(houseDTO.getBathRoom().trim())){
+            sql.append(" and bath_room = " + houseDTO.getBathRoom());
+        }
+        if(houseDTO.getPriceMinDay() != null && !"".equals(houseDTO.getPriceMinDay().trim())){
+            sql.append(" and price_by_day > " + houseDTO.getPriceMinDay());
+        }
+        if(houseDTO.getPriceMaxDay() != null && !"".equals(houseDTO.getPriceMaxDay().trim())){
+            sql.append(" and price_by_day < " + houseDTO.getPriceMaxDay());
         }
         return entityManager.createQuery(sql.toString()).getResultList();
     }
