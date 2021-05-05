@@ -1,7 +1,6 @@
 package com.example.project_hotel_california.service.house;
 
 import com.example.project_hotel_california.dto.HouseDTO;
-import com.example.project_hotel_california.model.House;
 
 import java.util.List;
 

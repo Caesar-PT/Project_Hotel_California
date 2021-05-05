@@ -1,5 +1,5 @@
 package com.example.project_hotel_california.model;
-import javax.management.relation.Role;
+
 import javax.persistence.*;
 
 import java.util.HashSet;
@@ -104,10 +104,6 @@ public class AppUser {
 
     public Set<AppRole> getRoles() {
         return roles;
-    }
-
-    public void setRoles(Set<AppRole> roles) {
-        this.roles = roles;
     }
 
 

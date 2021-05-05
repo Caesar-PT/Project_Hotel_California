@@ -62,6 +62,7 @@ public class UserController<IAuthenticationManager> {
         Set<AppRole> appRoles = new HashSet<>();
         appRoles.add(signUpRequest.getAppRole());
 
+
         AppUser user = new AppUser(signUpRequest.getUsername(), bcryptEncoder.encode(signUpRequest.getPassword()) ,
                 signUpRequest.getFullName(), signUpRequest.getAddress(),
                 signUpRequest.getPhoneNumber(), signUpRequest.getEmail(),signUpRequest.getAvatar(), appRoles
