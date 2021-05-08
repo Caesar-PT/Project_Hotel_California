@@ -82,9 +82,8 @@ public class UserController<IAuthenticationManager> {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtTokenUtil.generateAccessToken(login.getUsername());
+        String jwt = jwtTokenUtil.generateAccessToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        AppUser currentUser = accountService.getCurrentUser();
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
@@ -119,9 +118,10 @@ public class UserController<IAuthenticationManager> {
         return new ResponseEntity<>(accountService.save(oldAppUser), HttpStatus.OK);
     }
 
-    @GetMapping("/currentUser")
-    private ResponseEntity<AppUser> getCurrentUser(){
+    @GetMapping("/current")
+    public ResponseEntity<AppUser> getCurrentUser(){
         AppUser appUser = accountService.getCurrentUser();
         return new ResponseEntity<>(appUser, HttpStatus.OK);
     }
+
 }

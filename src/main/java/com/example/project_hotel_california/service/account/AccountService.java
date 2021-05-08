@@ -2,6 +2,7 @@ package com.example.project_hotel_california.service.account;
 
 import com.example.project_hotel_california.model.AppUser;
 import com.example.project_hotel_california.repository.AccountRepository;
+import com.example.project_hotel_california.request.UserPrinciple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,7 @@ public class AccountService implements IAccountService {
     public AppUser getCurrentUser() {
         AppUser user;
         String userName;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
             userName = ((UserDetails) principal).getUsername();

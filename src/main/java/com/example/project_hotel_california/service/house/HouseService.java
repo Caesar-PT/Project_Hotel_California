@@ -41,4 +41,8 @@ public class HouseService implements IHouseService<House>{
     public List<House> findHouseByCondition(HouseDTO houseDTO) {
         return houseRepository.findHouseByCondition(houseDTO);
     }
+
+    public List<House> getAllHouseByAppUser(AppUser appUser){
+        return houseRepository.getAllByAppUser(appUser);
+    }
 }

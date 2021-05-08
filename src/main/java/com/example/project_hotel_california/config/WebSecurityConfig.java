@@ -51,13 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("**").permitAll()
+        httpSecurity.cors().and().authorizeRequests().antMatchers("/user/login", "/house").permitAll()
+                .anyRequest().authenticated()
                 .and()
-//                .authorizeRequests().antMatchers("user/login").hasRole("USER")
-//                .and()
-
                 .formLogin()
-
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         httpSecurity.csrf().disable().

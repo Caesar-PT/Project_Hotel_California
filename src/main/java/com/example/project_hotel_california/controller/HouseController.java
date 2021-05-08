@@ -3,6 +3,7 @@ package com.example.project_hotel_california.controller;
 import com.example.project_hotel_california.dto.HouseDTO;
 import com.example.project_hotel_california.model.*;
 import com.example.project_hotel_california.repository.PhotoRepository;
+import com.example.project_hotel_california.request.UserPrinciple;
 import com.example.project_hotel_california.service.account.IAccountService;
 import com.example.project_hotel_california.service.district.DistrictService;
 import com.example.project_hotel_california.service.house.HouseService;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +53,7 @@ public class HouseController {
     @Autowired
     private ProvinceService provinceService;
 
+
     @GetMapping("")
     public ResponseEntity<List<House>> showAll() {
         List<House> houseList = houseService.findAll();
@@ -68,6 +72,7 @@ public class HouseController {
 
     @PostMapping("/create")
     public ResponseEntity<House> create(@RequestBody House house) {
+        house.setAppUser(accountService.getCurrentUser());
         houseService.save(house);
         return new ResponseEntity<>(house, HttpStatus.OK);
     }
@@ -141,6 +146,13 @@ public class HouseController {
         orderHouse.setHouse(house);
         orderHouseService.save(orderHouse);
         return new ResponseEntity<>(orderHouse, HttpStatus.OK);
+    }
+
+    @GetMapping("/myhouse")
+    public ResponseEntity<List<House>> getMyHouse(){
+       AppUser appUser = accountService.getCurrentUser();
+       List<House> list = houseService.getAllHouseByAppUser(appUser);
+       return new ResponseEntity<>(houseService.getAllHouseByAppUser(appUser), HttpStatus.OK);
     }
 
 
