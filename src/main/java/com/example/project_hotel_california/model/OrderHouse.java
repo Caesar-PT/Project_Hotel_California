@@ -1,7 +1,7 @@
 package com.example.project_hotel_california.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class OrderHouse {
@@ -15,15 +15,19 @@ public class OrderHouse {
     private Date checkin;
     private Date checkout;
 
+    @ManyToOne
+    private AppUser renter;
+
 
     public OrderHouse() {
     }
 
-    public OrderHouse(Long id, House house, Date checkin, Date checkout) {
+    public OrderHouse(Long id, House house, Date checkin, Date checkout, AppUser renter) {
         this.id = id;
         this.house = house;
         this.checkin = checkin;
         this.checkout = checkout;
+        this.renter = renter;
     }
 
     public Long getId() {
@@ -56,5 +60,13 @@ public class OrderHouse {
 
     public void setCheckout(Date checkout) {
         this.checkout = checkout;
+    }
+
+    public AppUser getRenter() {
+        return renter;
+    }
+
+    public void setRenter(AppUser renter) {
+        this.renter = renter;
     }
 }

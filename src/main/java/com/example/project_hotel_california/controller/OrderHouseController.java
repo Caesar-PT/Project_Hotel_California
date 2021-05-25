@@ -31,4 +31,14 @@ public class OrderHouseController {
         orderHouseService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/house/{id}")
+    public ResponseEntity<List<OrderHouse>> getAllByHouseId(@PathVariable Long id){
+        return new ResponseEntity<>(orderHouseService.getAllByHouseId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/renter/{id}")
+    public ResponseEntity<List<OrderHouse>> getALlByRenterId(@PathVariable Long id) {
+        return new ResponseEntity<>(orderHouseService.getAllByRenterId(id), HttpStatus.OK);
+    }
 }

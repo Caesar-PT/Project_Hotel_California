@@ -31,4 +31,14 @@ public class OrderService implements IOrderHouseService {
     public void remove(Long id) {
             orderHouseRepository.deleteById(id);
     }
+
+    @Override
+    public List<OrderHouse> getAllByHouseId(Long id) {
+        return orderHouseRepository.getAllByHouseId(id);
+    }
+
+    @Override
+    public List<OrderHouse> getAllByRenterId(Long id) {
+        return orderHouseRepository.getAllByRenterId(id);
+    }
 }

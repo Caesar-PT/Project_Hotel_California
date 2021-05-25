@@ -51,7 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().authorizeRequests().antMatchers("/user/login", "/house").permitAll()
+        httpSecurity.cors().and().authorizeRequests().antMatchers(
+                "/user/login",
+                "/user/signup",
+                "/house/**",
+                "/photo/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
