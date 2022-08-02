@@ -14,19 +14,45 @@ public class OrderHouse {
 
     private Date checkin;
     private Date checkout;
+    private String email;
+    private String phoneNumber;
+    private String houseInformation;
+    private String statusOrder;
 
     @ManyToOne
     private AppUser appUser;
 
     public OrderHouse() {
     }
+    public String getStatusOrder() {
+        return statusOrder;
+    }
 
-    public OrderHouse(Long id, House house, Date checkin, Date checkout, AppUser appUser) {
-        this.id = id;
-        this.house = house;
-        this.checkin = checkin;
-        this.checkout = checkout;
-        this.appUser = appUser;
+    public void setStatusOrder(String statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public String getHouseInformation() {
+        return houseInformation;
+    }
+
+    public void setHouseInformation(String houseInformation) {
+        this.houseInformation = houseInformation;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {

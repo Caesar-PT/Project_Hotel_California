@@ -84,7 +84,7 @@ public class UserController<IAuthenticationManager> {
         String jwt = jwtTokenUtil.generateAccessToken(login.getUsername());
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         AppUser currentUser = accountService.getCurrentUser();
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId()));
     }
 
     @GetMapping("")

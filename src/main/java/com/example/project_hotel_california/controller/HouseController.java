@@ -145,5 +145,21 @@ public class HouseController {
         return new ResponseEntity<>(orderHouse, HttpStatus.OK);
     }
 
+    @PostMapping("/bookHouse")
+    public ResponseEntity<OrderHouse> bookHouse(@RequestBody OrderHouse orderHouse){
+        orderHouseService.save(orderHouse);
+        return new ResponseEntity<>(orderHouse, HttpStatus.OK);
+    }
 
+    @PostMapping("/listOrder")
+    public ResponseEntity<List<OrderHouse>> getListOrderHouseByUser(@RequestBody Long id){
+        List<OrderHouse> list = orderHouseService.getOrderHouse(id);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @PostMapping("/changeStatus")
+    public ResponseEntity<OrderHouse> changeStatusOrder(@RequestBody OrderHouse orderHouse){
+        orderHouseService.save(orderHouse);
+        return new ResponseEntity<>(orderHouse, HttpStatus.OK);
+    }
 }

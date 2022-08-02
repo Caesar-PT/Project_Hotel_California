@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 @Service
 public class OrderService implements IOrderHouseService {
     @Autowired
     private OrderHouseRepository orderHouseRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<OrderHouse> findAll() {
@@ -31,4 +36,11 @@ public class OrderService implements IOrderHouseService {
     public void remove(Long id) {
             orderHouseRepository.deleteById(id);
     }
+
+    @Override
+    public List<OrderHouse> getOrderHouse(Long id){
+        String query = "from OrderHouse o where o.house.appUser.id = " + id;
+        return entityManager.createQuery(query).getResultList();
+    }
+
 }

@@ -16,15 +16,19 @@ public class JwtResponse {
         return type;
     }
 
-    //private Long id;
+    public Long getId() {
+        return id;
+    }
+
+    private Long id;
     private String token;
     private String type = "Bearer";
     private String username;
    // private Collection<? extends GrantedAuthority> roles;
 
-    public JwtResponse(String accessToken) {
+    public JwtResponse(String accessToken, Long id) {
         this.token = accessToken;
-       // this.id = id;
+        this.id = id;
         this.username = username;
         //this.roles = roles;
     }
